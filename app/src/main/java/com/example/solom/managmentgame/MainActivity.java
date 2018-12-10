@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initSocket(){
         try {
-            socket = IO.socket("http://10.0.3.2:5000");
+            socket = IO.socket("http://10.60.0.102:5000");
             socket.connect();
         } catch (Exception e) {
             e.printStackTrace();

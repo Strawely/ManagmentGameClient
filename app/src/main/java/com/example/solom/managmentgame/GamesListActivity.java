@@ -1,20 +1,17 @@
 package com.example.solom.managmentgame;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.github.nkzawa.socketio.client.Ack;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -75,6 +72,19 @@ public class GamesListActivity extends Activity {
             e.printStackTrace();
         }
     }
+
+    public void  onCreateGameClick(View view){
+        try {
+            if(!socket.connected()) socket.connect();
+            Intent intent = new Intent(this, CreateGameActivity.class);
+            SocketHandler.setSocket(socket);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void onGetGamesClick(View view) {
 

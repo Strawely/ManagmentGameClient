@@ -7,16 +7,20 @@
     android:orientation="vertical"
     tools:context=".GamesListActivity">
 
+    <Button
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onCreateGameClick"
+        android:src="@android:drawable/ic_menu_add" />
+
     <ListView
         android:id="@+id/gamesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
 
 
 </LinearLayout>
