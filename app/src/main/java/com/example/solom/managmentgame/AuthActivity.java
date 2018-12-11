@@ -37,12 +37,13 @@ public class AuthActivity extends Activity {
                         if(args.length == 1){
                             JSONArray playerProps = (JSONArray) args[0];
                             GameStateHandler.setPlayer(new Player(playerProps.getInt(0), playerProps.getString(1), playerProps.getInt(2)));
+
                         }
                         else {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, "Ошибка авторизации", Toast.LENGTH_SHORT);
+                                    Toast.makeText(context, "Ошибка авторизации", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
