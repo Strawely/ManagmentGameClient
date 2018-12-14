@@ -9,15 +9,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.github.nkzawa.socketio.client.Ack;
-import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GamesListActivity extends Activity {
 
-    private Socket socket;
     private Handler handler = new Handler();
 
     @Override
@@ -25,7 +25,6 @@ public class GamesListActivity extends Activity {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_games_list);
-            socket = SocketHandler.getSocket();
             updateGamesList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,20 +35,19 @@ public class GamesListActivity extends Activity {
     private void updateGamesList(){
         try {
             final ArrayList<String> gamesList = new ArrayList<>();
-            ListView list = (ListView)findViewById(R.id.gamesList);
-            final ArrayAdapter<String> gamesNamesAdapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, gamesList);
+            ListView list = findViewById(R.id.gamesList);
+            final ArrayAdapter<String> gamesNamesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gamesList);
             list.setAdapter(gamesNamesAdapter);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    socket.emit("get_games_list", null, new Ack() {
+                    gamesList.clear();
+                    SocketConnector.getSocket().emit("get_games_list", null, new Ack() {
                         @Override
                         public void call(Object... args) {
-                            try {
-                                gamesList.clear();
-                                JSONArray jsonArgs = (JSONArray) args[0];
-                                String[] gamesNames = new String[jsonArgs.length()];
-                                for (int i = 0; i < jsonArgs.length(); i++) {
+                            JSONArray jsonArgs = (JSONArray) args[0];
+                            for (int i = 0; i < jsonArgs.length(); i++) {
+                                try {
                                     gamesList.add(jsonArgs.getJSONArray(i).getString(5));
                                     handler.post(new Runnable() {
                                         @Override
@@ -57,10 +55,9 @@ public class GamesListActivity extends Activity {
                                             gamesNamesAdapter.notifyDataSetChanged();
                                         }
                                     });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                fillGamesList(gamesNames);
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
                         }
                     });
@@ -75,26 +72,11 @@ public class GamesListActivity extends Activity {
 
     public void  onCreateGameClick(View view){
         try {
-            if(!socket.connected()) socket.connect();
             Intent intent = new Intent(this, CreateGameActivity.class);
-            SocketHandler.setSocket(socket);
             startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    }
-
-
-    public void onGetGamesClick(View view) {
-
-    }
-
-    private void fillGamesList(String[] gamesNames){
-        try {
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

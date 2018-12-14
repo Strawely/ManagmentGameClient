@@ -2,6 +2,7 @@ package com.example.solom.managmentgame;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -16,7 +17,6 @@ import org.json.JSONException;
 
 public class AuthActivity extends Activity {
 
-    private Socket socket = SocketHandler.getSocket();
     private Handler handler = new Handler();
 
     @Override
@@ -30,14 +30,14 @@ public class AuthActivity extends Activity {
             String nickname = ((EditText)findViewById(R.id.loginEditText)).getText().toString();
             Object[] args = {nickname, 0};
             final Context context = this;
-            socket.emit("register_player", args, new Ack() {
+            SocketConnector.getSocket().emit("register_player", args, new Ack() {
                 @Override
                 public void call(Object... args) {
                     try {
-                        if(args.length == 1){
-                            JSONArray playerProps = (JSONArray) args[0];
-                            GameStateHandler.setPlayer(new Player(playerProps.getInt(0), playerProps.getString(1), playerProps.getInt(2)));
-
+                        if((Integer)args[0] == 0){
+                            JSONArray playerProps = (JSONArray) args[1];
+                            Player newPlayer = new Player(playerProps.getInt(0), playerProps.getString(1), playerProps.getInt(2));
+                            GameStateHandler.setPlayer(newPlayer);
                         }
                         else {
                             handler.post(new Runnable() {

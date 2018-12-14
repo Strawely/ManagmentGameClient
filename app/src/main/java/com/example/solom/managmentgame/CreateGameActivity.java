@@ -64,8 +64,8 @@ public class CreateGameActivity extends Activity {
             int eSM=Integer.parseInt(spinnerESM.getSelectedItem().toString());
 
             int moneyInGame=Integer.parseInt(money.getText().toString());
-            Object arrObj[]={GameStateHandler.getPlayer().getId(),socket.id(),eSM,eGP,moneyInGame,fab,aFab,plNum};
-            socket.emit("create_game",arrObj);
+            Object arrObj[]={GameStateHandler.getPlayer().getId(),SocketConnector.getSocket().id(),eSM,eGP,moneyInGame,fab,aFab,plNum};
+            SocketConnector.getSocket().emit("create_game",arrObj);
         }
         catch(Exception e){
             e.printStackTrace();

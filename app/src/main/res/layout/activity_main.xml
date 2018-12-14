@@ -25,7 +25,8 @@
     </LinearLayout>
 
     <Button
-        android:enabled="true"
+        android:id="@+id/playBtn"
+        android:enabled="false"
         android:textAllCaps="false"
         android:textSize="21sp"
         android:layout_width="wrap_content"
