@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".HelpActivity">
 
-    <Toolbar
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
@@ -16,6 +16,7 @@
             android:textSize="@dimen/text_default_size"
             android:textColor="@color/white"
             android:text="Справка"/>
-    </Toolbar>
+
+    </android.support.v7.widget.Toolbar>
 
 </android.support.constraint.ConstraintLayout>

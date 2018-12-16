@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.github.nkzawa.socketio.client.Ack;
@@ -33,10 +32,10 @@ public class GamesListActivity extends Activity {
 
     private void updateGamesList(){
         try {
-            final ArrayList<String> gamesList = new ArrayList<>();
+            final ArrayList<Game> gamesList = new ArrayList<>();
             ListView list = findViewById(R.id.gamesList);
-            final ArrayAdapter<String> gamesNamesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gamesList);
-            list.setAdapter(gamesNamesAdapter);
+            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
+            list.setAdapter(gamesAdapter);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -47,17 +46,21 @@ public class GamesListActivity extends Activity {
                             JSONArray jsonArgs = (JSONArray) args[0];
                             for (int i = 0; i < jsonArgs.length(); i++) {
                                 try {
-                                    gamesList.add(jsonArgs.getJSONArray(i).getString(5));
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            gamesNamesAdapter.notifyDataSetChanged();
-                                        }
-                                    });
+                                    JSONArray jsonArray = jsonArgs.getJSONArray(i);
+                                    gamesList.add(new Game(jsonArray.getInt(0), jsonArray.getInt(1), jsonArray.getInt(2),
+                                            jsonArray.getInt(3), (jsonArray.getInt(4) != 0), jsonArray.getString(5), jsonArray.getInt(6),
+                                            jsonArray.getInt(7), jsonArray.getInt(8),jsonArray.getInt(9), jsonArray.getInt(10),
+                                            jsonArray.getInt(11), jsonArray.getInt(12)));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    gamesAdapter.notifyDataSetChanged();
+                                }
+                            });
                         }
                     });
                     handler.postDelayed(this, 2000);
