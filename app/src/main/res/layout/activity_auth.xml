@@ -4,40 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="start"
     android:orientation="vertical"
     tools:context=".AuthActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:background="@color/colorPrimary">
-        <Button
-            android:background="@color/colorPrimary"
+        <ImageView
+            android:layout_height="match_parent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:onClick="onBackClick"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:text="Назад"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
             android:onClick="onBackClick"/>
     </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Как вас зовут?"/>
+        android:layout_gravity="center"
+        android:text="Как вас зовут?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_default_size" />
 
     <EditText
         android:id="@+id/loginEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="8"
         android:hint="Ваше имя"
-        android:maxEms="10"/>
+        android:maxEms="15"
+        android:textSize="@dimen/text_default_size" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onLoginBtnClick"
+        android:text="       Сохранить       "
         android:textAllCaps="false"
-        android:text="Сохранить"
-        android:onClick="onLoginBtnClick"/>
+        android:textSize="@dimen/text_default_size" />
 
 </LinearLayout>

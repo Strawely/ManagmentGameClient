@@ -9,20 +9,25 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/avatarImageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/default_avatar"
+        android:layout_margin="10dp"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcome_text_default"
-            android:textSize="21sp"
-            android:textColor="@color/black"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_text_default"
+        android:textSize="@dimen/text_default_size"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/playBtn"
