@@ -47,5 +47,14 @@
         android:text="@string/enter_btn"
         android:onClick="onEnterBtnClick"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_info_outline_black_24dp"
+        android:onClick="onHelpClicked"/>
+
 
 </LinearLayout>

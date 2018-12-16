@@ -23,7 +23,8 @@
         <activity android:name=".GamesListActivity" />
         <activity android:name=".CreateGameActivity" />
         <activity android:name=".AuthActivity" />
-        <activity android:name=".AvatarChoiceActivity"></activity>
+        <activity android:name=".AvatarChoiceActivity" />
+        <activity android:name=".HelpActivity"></activity>
     </application>
 
 </manifest>

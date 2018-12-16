@@ -4,96 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:rowCount="4"
-    android:columnCount="4"
+    android:orientation="vertical"
     tools:context=".AvatarChoiceActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сохранить"
+            android:textSize="@dimen/text_default_size"
+            android:textColor="@color/white"
+            android:onClick="onSaveClick"/>
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
         <ImageView
-            android:id="@+id/avatar0ImageView"
             android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:src="@drawable/avatar_0"/>
 
-        <ImageView
-            android:id="@+id/avatar1ImageView"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:src="@drawable/avatar_2"/>
-
-        <ImageView
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:src="@drawable/avatar_4"/>
-
-        <ImageView
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:src="@drawable/avatar_6"/>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
         <CheckBox
+            android:id="@+id/avatar0CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false" />
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar_1"/>
 
-    </RelativeLayout>
+        <CheckBox
+            android:id="@+id/avatar1CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
         <ImageView
             android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:src="@drawable/avatar_0"/>
-
-        <ImageView
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:src="@drawable/avatar_2"/>
 
-        <ImageView
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:src="@drawable/avatar_4"/>
+        <CheckBox
+            android:id="@+id/avatar2CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar_3"/>
+
+        <CheckBox
+            android:id="@+id/avatar3CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar_4"/>
+
+        <CheckBox
+            android:id="@+id/avatar4CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar_5"/>
+
+        <CheckBox
+            android:id="@+id/avatar5CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent"
             android:src="@drawable/avatar_6"/>
+
+        <CheckBox
+            android:id="@+id/avatar6CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar_7"/>
+
+        <CheckBox
+            android:id="@+id/avatar7CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

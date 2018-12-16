@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewAvatar(){
         ImageView avatarImage = findViewById(R.id.avatarImageView);
-        if(GameStateHandler.getPlayer() == null) return;
+        if(GameStateHandler.getPlayer() == null)
+            avatarImage.setImageResource(R.drawable.default_avatar);
         switch (GameStateHandler.getPlayer().getAvatar()){
             case 0:
                 avatarImage.setImageResource(R.drawable.avatar_0);
@@ -105,5 +106,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onHelpClicked(View view) {
     }
 }
