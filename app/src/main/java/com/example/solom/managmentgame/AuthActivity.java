@@ -49,7 +49,7 @@ public class AuthActivity extends Activity {
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(context, "Ошибка авторизации", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "Ошибка авторизации", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
