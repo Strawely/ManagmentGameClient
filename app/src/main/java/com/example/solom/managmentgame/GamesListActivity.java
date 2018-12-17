@@ -76,6 +76,7 @@ public class GamesListActivity extends Activity {
         try {
             Intent intent = new Intent(this, CreateGameActivity.class);
             startActivity(intent);
+            finish();
         } catch (Exception e) {
             e.printStackTrace();
         }

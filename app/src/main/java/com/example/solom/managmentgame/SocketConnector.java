@@ -67,4 +67,8 @@ public class SocketConnector {
         });
     }
 
+    public static void leaveGame(){
+        Object[] params = new Object[]{GameStateHandler.getPlayer().getId(), socket.id()};
+        socket.emit("leave_game", params);
+    }
 }

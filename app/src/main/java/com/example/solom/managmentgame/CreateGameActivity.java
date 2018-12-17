@@ -1,13 +1,12 @@
 package com.example.solom.managmentgame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import com.github.nkzawa.socketio.client.Socket;
 
 public class CreateGameActivity extends Activity {
 
@@ -29,21 +28,21 @@ public class CreateGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
 
-        spinner = (Spinner) findViewById(R.id.numOfPlayers);
-        spinnerfab = (Spinner) findViewById(R.id.numOfFact);
-        spinnerAfab = (Spinner) findViewById(R.id.numOfFactA);
-        spinnerESM = (Spinner) findViewById(R.id.numOfESM);
-        spinnerEGP = (Spinner) findViewById(R.id.numOfEGP);
-        money=(EditText) findViewById(R.id.editText4);
+        spinner = findViewById(R.id.playersSpinner);
+        spinnerfab = findViewById(R.id.fabrics1Spinner);
+        spinnerAfab = findViewById(R.id.fabrics2Spinner);
+        spinnerESM = findViewById(R.id.esmSpinner);
+        spinnerEGP = findViewById(R.id.egpSpinner);
+        money= findViewById(R.id.moneyEditText);
         gameNameEditText = findViewById(R.id.gameNameEditText);
         // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, numOfPlayers);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, numOfPlayers);
         // Определяем разметку для использования при выборе элемента
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Применяем адаптер к элементу spinner
         spinner.setAdapter(adapter);
         //адаптер от 2 до 5
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, twoToFive);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, twoToFive);
         // Определяем разметку для использования при выборе элемента
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Применяем адаптер к элементу spinner
@@ -57,8 +56,6 @@ public class CreateGameActivity extends Activity {
 
     public void createGameOnClick(View view){
         try{
-            Socket socket=SocketHandler.getSocket();
-
             int plNum=Integer.parseInt(spinner.getSelectedItem().toString());
             int fab=Integer.parseInt(spinnerfab.getSelectedItem().toString());
             int aFab=Integer.parseInt(spinnerAfab.getSelectedItem().toString());
@@ -69,6 +66,9 @@ public class CreateGameActivity extends Activity {
             int moneyInGame=Integer.parseInt(money.getText().toString());
             Object arrObj[]={GameStateHandler.getPlayer().getId(),SocketConnector.getSocket().id(),name, eSM,eGP,moneyInGame,fab,aFab,plNum};
             SocketConnector.getSocket().emit("create_game",arrObj);
+            Intent intent = new Intent(this, PlayersWaitActivity.class);
+            startActivity(intent);
+            finish();
         }
         catch(Exception e){
             e.printStackTrace();
