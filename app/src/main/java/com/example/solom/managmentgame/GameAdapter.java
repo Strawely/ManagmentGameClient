@@ -44,9 +44,14 @@ public class GameAdapter extends BaseAdapter {
         }
         Game game = getGame(i);
 
-        ((TextView)v.findViewById(R.id.gameNameTextView)).setText(game.getName());
+        ((TextView)v.findViewById(R.id.gameNameTextView)).setText("Игра " + game.getName());
         ((TextView)v.findViewById(R.id.startEsmTextView)).setText(Integer.toString(game.getsEsm()));
-        ((TextView)v.findViewById(R.id.playersTextView)).setText(String.format("%d / %d", game.getProgress(), game.getMaxPlayers()));
+        ((TextView)v.findViewById(R.id.playersTextView)).setText(String.format("Игроков %d / %d", game.getProgress(), game.getMaxPlayers()));
+        ((TextView)v.findViewById(R.id.startEgpTextView)).setText(String.format("%d", game.getsEgp()));
+        ((TextView)v.findViewById(R.id.startFabrics1TextView)).setText(String.format("%d", game.getsFabrics1()));
+        ((TextView)v.findViewById(R.id.startFabrics2TextView)).setText(String.format("%d", game.getsFabrics2()));
+        ((TextView)v.findViewById(R.id.startMoneyTextView)).setText(String.format("%d", game.getsMoney()));
+
 
         return v;
     }
