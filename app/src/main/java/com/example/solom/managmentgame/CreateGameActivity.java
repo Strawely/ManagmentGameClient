@@ -21,6 +21,7 @@ public class CreateGameActivity extends Activity {
     Spinner spinnerAfab;
     Spinner spinnerESM;
     Spinner spinnerEGP;
+    EditText gameNameEditText;
     EditText money;
 
     @Override
@@ -34,6 +35,7 @@ public class CreateGameActivity extends Activity {
         spinnerESM = (Spinner) findViewById(R.id.numOfESM);
         spinnerEGP = (Spinner) findViewById(R.id.numOfEGP);
         money=(EditText) findViewById(R.id.editText4);
+        gameNameEditText = findViewById(R.id.gameNameEditText);
         // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, numOfPlayers);
         // Определяем разметку для использования при выборе элемента
@@ -62,9 +64,10 @@ public class CreateGameActivity extends Activity {
             int aFab=Integer.parseInt(spinnerAfab.getSelectedItem().toString());
             int eGP=Integer.parseInt(spinnerEGP.getSelectedItem().toString());
             int eSM=Integer.parseInt(spinnerESM.getSelectedItem().toString());
+            String name = gameNameEditText.getText().toString();
 
             int moneyInGame=Integer.parseInt(money.getText().toString());
-            Object arrObj[]={GameStateHandler.getPlayer().getId(),SocketConnector.getSocket().id(),eSM,eGP,moneyInGame,fab,aFab,plNum};
+            Object arrObj[]={GameStateHandler.getPlayer().getId(),SocketConnector.getSocket().id(),name, eSM,eGP,moneyInGame,fab,aFab,plNum};
             SocketConnector.getSocket().emit("create_game",arrObj);
         }
         catch(Exception e){
