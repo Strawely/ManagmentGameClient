@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.nkzawa.socketio.client.Ack;
@@ -81,5 +82,26 @@ public class GamesListActivity extends Activity {
             e.printStackTrace();
         }
 
+    }
+    public void conectGameOnClick(View view) {
+        try {
+            final ArrayList<Game> gamesList = new ArrayList<>();
+            ListView list = findViewById(R.id.gamesList);
+            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
+            list.setAdapter(gamesAdapter);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Game game=(Game)gamesAdapter.getItem(position);
+                    Object arrObj[] = {game.getId(), SocketConnector.getSocket().id(), GameStateHandler.getPlayer().getId()};
+                    SocketConnector.getSocket().emit("player_join", arrObj);
+                    Intent intent = new Intent(this, PlayersWaitActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
