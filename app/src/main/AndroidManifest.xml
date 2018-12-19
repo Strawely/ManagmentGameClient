@@ -25,7 +25,8 @@
         <activity android:name=".AuthActivity" />
         <activity android:name=".AvatarChoiceActivity" />
         <activity android:name=".HelpActivity" />
-        <activity android:name=".PlayersWaitActivity"></activity>
+        <activity android:name=".PlayersWaitActivity" />
+        <activity android:name=".MainGameActivity"></activity>
     </application>
 
 </manifest>
