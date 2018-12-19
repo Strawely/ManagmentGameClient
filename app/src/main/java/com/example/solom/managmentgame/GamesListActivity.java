@@ -1,6 +1,7 @@
 package com.example.solom.managmentgame;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,9 @@ import java.util.ArrayList;
 public class GamesListActivity extends Activity {
 
     private Handler handler = new Handler();
+    private Context context = this;
+    private ArrayList<Game> gamesList = new ArrayList<>();
+    private GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,9 @@ public class GamesListActivity extends Activity {
 
     private void updateGamesList(){
         try {
-            final ArrayList<Game> gamesList = new ArrayList<>();
+//            final ArrayList<Game> gamesList = new ArrayList<>();
             ListView list = findViewById(R.id.gamesList);
-            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
+//            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
             list.setAdapter(gamesAdapter);
             handler.post(new Runnable() {
                 @Override
@@ -83,19 +87,19 @@ public class GamesListActivity extends Activity {
         }
 
     }
-    public void conectGameOnClick(View view) {
+    public void connectGameOnClick(View view) {
         try {
-            final ArrayList<Game> gamesList = new ArrayList<>();
+//            final ArrayList<Game> gamesList = new ArrayList<>();
             ListView list = findViewById(R.id.gamesList);
-            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
-            list.setAdapter(gamesAdapter);
+//            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
+//            list.setAdapter(gamesAdapter);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Game game=(Game)gamesAdapter.getItem(position);
                     Object arrObj[] = {game.getId(), SocketConnector.getSocket().id(), GameStateHandler.getPlayer().getId()};
                     SocketConnector.getSocket().emit("player_join", arrObj);
-                    Intent intent = new Intent(this, PlayersWaitActivity.class);
+                    Intent intent = new Intent(context, PlayersWaitActivity.class);
                     startActivity(intent);
                     finish();
                 }

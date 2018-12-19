@@ -30,7 +30,7 @@
             android:id="@+id/gamesList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="conectGameOnClick"></ListView>
+            android:onClick="connectGameOnClick"></ListView>
 
 
         <android.support.design.widget.FloatingActionButton
