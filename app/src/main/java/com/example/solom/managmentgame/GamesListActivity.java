@@ -96,7 +96,6 @@ public class GamesListActivity extends Activity {
                     Object arrObj[] = {game.getId(), SocketConnector.getSocket().id(), GameStateHandler.getPlayer().getId()};
                     SocketConnector.getSocket().emit("player_join", arrObj);
                     Intent intent = new Intent(this, PlayersWaitActivity.class);
-
                     startActivity(intent);
                     finish();
                 }
