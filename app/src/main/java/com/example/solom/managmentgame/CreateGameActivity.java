@@ -74,5 +74,5 @@ public class CreateGameActivity extends Activity {
             e.printStackTrace();
         }
     }
+    }
 
-}
