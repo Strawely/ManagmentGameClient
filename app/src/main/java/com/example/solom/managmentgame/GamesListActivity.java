@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Ack;
 
 import org.json.JSONArray;
@@ -44,6 +45,20 @@ public class GamesListActivity extends Activity {
                     finish();
                 }
             });
+            SocketConnector.getSocket().on("game_start", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    try {
+                        Object[] a = args;
+                        System.out.println(a.toString());
+                        Intent intent = new Intent(context, GameActivity.class);
+                        intent.putExtra("marketLvl", (Integer) args[0]);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,8 +67,6 @@ public class GamesListActivity extends Activity {
 
     private void updateGamesList(){
         try {
-//            final ArrayList<Game> gamesList = new ArrayList<>();
-//            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
             list.setAdapter(gamesAdapter);
             handler.post(new Runnable() {
                 @Override
