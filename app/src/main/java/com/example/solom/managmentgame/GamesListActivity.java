@@ -20,15 +20,30 @@ public class GamesListActivity extends Activity {
 
     private Handler handler = new Handler();
     private Context context = this;
-    private ArrayList<Game> gamesList = new ArrayList<>();
-    private GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
+    private ArrayList<Game> gamesList;
+    private GameAdapter gamesAdapter;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_games_list);
+            list = findViewById(R.id.gamesList);
+            gamesList = new ArrayList<>();
+            gamesAdapter = new GameAdapter(this, gamesList);
             updateGamesList();
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Game game=(Game)gamesAdapter.getItem(position);
+                    Object arrObj[] = {game.getId(), SocketConnector.getSocket().id(), GameStateHandler.getPlayer().getId()};
+                    SocketConnector.getSocket().emit("join_game", arrObj);
+                    Intent intent = new Intent(context, PlayersWaitActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +53,6 @@ public class GamesListActivity extends Activity {
     private void updateGamesList(){
         try {
 //            final ArrayList<Game> gamesList = new ArrayList<>();
-            ListView list = findViewById(R.id.gamesList);
 //            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
             list.setAdapter(gamesAdapter);
             handler.post(new Runnable() {
@@ -86,26 +100,5 @@ public class GamesListActivity extends Activity {
             e.printStackTrace();
         }
 
-    }
-    public void connectGameOnClick(View view) {
-        try {
-//            final ArrayList<Game> gamesList = new ArrayList<>();
-            ListView list = findViewById(R.id.gamesList);
-//            final GameAdapter gamesAdapter = new GameAdapter(this, gamesList);
-//            list.setAdapter(gamesAdapter);
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Game game=(Game)gamesAdapter.getItem(position);
-                    Object arrObj[] = {game.getId(), SocketConnector.getSocket().id(), GameStateHandler.getPlayer().getId()};
-                    SocketConnector.getSocket().emit("player_join", arrObj);
-                    Intent intent = new Intent(context, PlayersWaitActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
