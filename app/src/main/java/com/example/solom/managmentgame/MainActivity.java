@@ -30,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         System.out.println("onResume()");
         System.out.println(GameStateHandler.getPlayer());
-        if(GameStateHandler.getPlayer() != null){
+        if(GameStateHandler.getPlayer() != null && !GameStateHandler.getPlayer().getNickname().isEmpty()){
             findViewById(R.id.playBtn).setEnabled(true);
             viewAvatar();
             setWelcomeText();
