@@ -14,12 +14,7 @@ public class BankActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank);
-        SocketConnector.getSocket().on("wait_esm_order", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                setContentView(R.layout.esm_auction_layout);
-            }
-        });
+
     }
 
     public void onEsmRequestClick(View view) {

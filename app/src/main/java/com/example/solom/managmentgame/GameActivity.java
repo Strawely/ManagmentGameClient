@@ -27,12 +27,22 @@ public class GameActivity extends TabActivity {
         // инициализация была выполнена в getTabHost
         // метод setup вызывать не нужно
 
+        TabHost.TabSpec tabSpecBank;
         TabHost.TabSpec tabSpec;
 
-        tabSpec = tabHost.newTabSpec("bank");
-        tabSpec.setIndicator("Банк");
-        tabSpec.setContent(new Intent(this, BankActivity.class));
-        tabHost.addTab(tabSpec);
+        tabSpecBank = tabHost.newTabSpec("bank");
+        tabSpecBank.setIndicator("Банк");
+        Intent intent = new Intent(this, BankActivity.class);
+        tabSpecBank.setContent(intent);
+        tabHost.addTab(tabSpecBank);
+        SocketConnector.getSocket().on("wait_esm_order", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                tabSpecBank.setIndicator("Банк", Drawable.createFromPath("drawable://" + R.drawable.esm));
+                setContentView(R.layout.esm_auction_layout);
+            }
+        });
+
 
         tabSpec = tabHost.newTabSpec("tag2");
         tabSpec.setIndicator("Вкладка 2");
