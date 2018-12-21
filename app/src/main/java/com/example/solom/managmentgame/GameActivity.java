@@ -1,57 +1,41 @@
 package com.example.solom.managmentgame;
 
-import android.app.TabActivity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TabHost;
+import android.os.Handler;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 
 import com.github.nkzawa.emitter.Emitter;
 
-public class GameActivity extends TabActivity {
+public class GameActivity extends AppCompatActivity {
+
+    private ViewPagerAdapter adapter;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.test_game_activity);
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        setupViewPager(viewPager);
+
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
 
         if(GameStateHandler.getGame() != null){
             Intent intent = getIntent();
             GameStateHandler.getGame().setMarketLvl(intent.getIntExtra("marketLvl", 3));
         }
 
-        // получаем TabHost
-        TabHost tabHost = getTabHost();
+        tabLayout.getTabAt(0).setIcon(R.drawable.bank);
+    }
 
-        // инициализация была выполнена в getTabHost
-        // метод setup вызывать не нужно
-
-        TabHost.TabSpec tabSpecBank;
-        TabHost.TabSpec tabSpec;
-
-        tabSpecBank = tabHost.newTabSpec("bank");
-        tabSpecBank.setIndicator("Банк");
-        Intent intent = new Intent(this, BankActivity.class);
-        tabSpecBank.setContent(intent);
-        tabHost.addTab(tabSpecBank);
-        SocketConnector.getSocket().on("wait_esm_order", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                tabSpecBank.setIndicator("Банк", Drawable.createFromPath("drawable://" + R.drawable.esm));
-                setContentView(R.layout.esm_auction_layout);
-            }
-        });
-
-
-        tabSpec = tabHost.newTabSpec("tag2");
-        tabSpec.setIndicator("Вкладка 2");
-        tabSpec.setContent(new Intent(this, FabricActivity.class));
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec("tag3");
-        tabSpec.setIndicator("Вкладка 3");
-        tabSpec.setContent(new Intent(this, CompetitorsActivity.class));
-        tabHost.addTab(tabSpec);
+    private void setupViewPager(ViewPager viewPager) {
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new EsmFragment(), "ЕСМ");
+        adapter.addFragment(new FactoryFragment(), "Фабрики");
+        viewPager.setAdapter(adapter);
     }
 }

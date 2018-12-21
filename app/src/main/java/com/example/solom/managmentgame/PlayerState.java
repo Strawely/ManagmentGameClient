@@ -100,14 +100,16 @@ public class PlayerState {
         SocketConnector.getSocket().emit("get_player_state", sendObj, new Ack() {
             @Override
             public void call(Object... args) {
-                playerState.id=(Integer)args[0];
-                playerState.esm=(Integer)args[1];
-                playerState.egp=(Integer)args[2];
-                playerState.fabrics1=(Integer)args[3];
-                playerState.fabrics2=(Integer)args[4];
-                playerState.gameId=(Integer)args[5];
-                playerState.money=(Integer)args[6];
-                playerState.rang=(Integer)args[7];
+                if (args.length >= 8) {
+                    playerState.id=(Integer)args[0];
+                    playerState.esm=(Integer)args[1];
+                    playerState.egp=(Integer)args[2];
+                    playerState.fabrics1=(Integer)args[3];
+                    playerState.fabrics2=(Integer)args[4];
+                    playerState.gameId=(Integer)args[5];
+                    playerState.money=(Integer)args[6];
+                    playerState.rang=(Integer)args[7];
+                }
             }
         });
 return playerState;

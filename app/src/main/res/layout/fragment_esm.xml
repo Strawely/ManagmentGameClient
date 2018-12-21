@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".EsmFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:columnCount="4"
     app:rowCount="5"
@@ -101,7 +102,6 @@
         app:layout_columnSpan="4"
         android:text="Отправить заявку"
         android:background="@color/white"
-        android:textColor="@color/dark_red"
-        android:onClick="onEsmRequestClick"/>
+        android:textColor="@color/dark_red"/>
 
 </android.support.v7.widget.GridLayout>

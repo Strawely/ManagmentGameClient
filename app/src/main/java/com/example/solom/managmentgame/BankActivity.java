@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import com.github.nkzawa.emitter.Emitter;
 
+import java.util.Objects;
+
 public class BankActivity extends Activity {
 
     @Override
@@ -17,10 +19,14 @@ public class BankActivity extends Activity {
 
     }
 
-    public void onEsmRequestClick(View view) {
-        EditText priceEditText = findViewById(R.id.esmPriceEditText);
-        EditText qtyEditText = findViewById(R.id.esmQtyEditText);
-        SocketConnector.sendEsmRequest(Integer.getInteger(qtyEditText.getText().toString()),
-                Integer.getInteger(priceEditText.getText().toString()));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(GameStateHandler.getGame() == null) return;
+        switch (GameStateHandler.getGame().getTurnStage()){
+            case 1:
+                setContentView(R.layout.esm_auction_layout);
+                break;
+        }
     }
 }
