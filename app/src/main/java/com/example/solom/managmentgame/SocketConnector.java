@@ -10,6 +10,7 @@ import org.json.JSONException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SocketConnector {
 
@@ -70,5 +71,10 @@ public class SocketConnector {
     public static void leaveGame(){
         Object[] params = new Object[]{GameStateHandler.getPlayer().getId(), socket.id()};
         socket.emit("leave_game", params);
+    }
+
+    public static void sendEsmRequest(int qty, int price){
+        Object[] args = new Object[]{Objects.requireNonNull(GameStateHandler.getPlayer()).getId(), price, qty};
+        socket.emit("esm_order", args);
     }
 }

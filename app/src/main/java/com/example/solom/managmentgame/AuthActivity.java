@@ -88,12 +88,24 @@ public class AuthActivity extends Activity {
                             JSONArray playerProps = (JSONArray) args[1];
                             Player newPlayer = new Player(playerProps.getInt(0), playerProps.getString(1), playerProps.getInt(2));
                             GameStateHandler.setPlayer(newPlayer);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Зарегистрирован новый игрок", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                         else {
                             if ((Integer)args[0] == 1){
                                 JSONArray playerProps = (JSONArray) args[1];
                                 Player newPlayer = new Player(playerProps.getInt(0), playerProps.getString(1), playerProps.getInt(2));
                                 GameStateHandler.setPlayer(newPlayer);
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(context, "Успешная авторизация", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                             else {
                                 handler.post(new Runnable() {

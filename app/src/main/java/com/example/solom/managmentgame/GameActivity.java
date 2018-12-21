@@ -2,9 +2,12 @@ package com.example.solom.managmentgame;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TabHost;
+
+import com.github.nkzawa.emitter.Emitter;
 
 public class GameActivity extends TabActivity {
 
@@ -12,6 +15,12 @@ public class GameActivity extends TabActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        if(GameStateHandler.getGame() != null){
+            Intent intent = getIntent();
+            GameStateHandler.getGame().setMarketLvl(intent.getIntExtra("marketLvl", 3));
+        }
+
         // получаем TabHost
         TabHost tabHost = getTabHost();
 
@@ -20,8 +29,8 @@ public class GameActivity extends TabActivity {
 
         TabHost.TabSpec tabSpec;
 
-        tabSpec = tabHost.newTabSpec("tag1");
-        tabSpec.setIndicator("Вкладка 1");
+        tabSpec = tabHost.newTabSpec("bank");
+        tabSpec.setIndicator("Банк");
         tabSpec.setContent(new Intent(this, BankActivity.class));
         tabHost.addTab(tabSpec);
 

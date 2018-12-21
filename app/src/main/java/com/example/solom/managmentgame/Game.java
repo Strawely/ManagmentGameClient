@@ -83,4 +83,8 @@ public class Game {
     public int getProgress() {
         return progress;
     }
+
+    public void setMarketLvl(int marketLvl) {
+        this.marketLvl = marketLvl;
+    }
 }
