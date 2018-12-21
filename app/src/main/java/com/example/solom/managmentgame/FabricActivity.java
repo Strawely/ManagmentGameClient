@@ -11,5 +11,6 @@ private PlayerState playerState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fabric);
         playerState=PlayerState.getPlayerState(GameStateHandler.getPlayer().getId());
+
     }
 }
