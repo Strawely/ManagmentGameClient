@@ -25,12 +25,13 @@
         <activity android:name=".AuthActivity" />
         <activity android:name=".AvatarChoiceActivity" />
         <activity android:name=".HelpActivity" />
-        <activity android:name=".PlayersWaitActivity"
+        <activity
+            android:name=".PlayersWaitActivity"
             android:noHistory="true" />
         <activity android:name=".BankActivity" />
         <activity android:name=".FabricActivity" />
-        <activity android:name=".CompetitorsActivity"/>
-        <activity android:name=".GameActivity"/>
+        <activity android:name=".CompetitorsActivity" />
+        <activity android:name=".GameActivity" />
     </application>
 
 </manifest>
