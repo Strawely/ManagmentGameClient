@@ -93,7 +93,7 @@ public class PlayerState {
     public void creditPayoff(){
 
     }
-    public static void getPlayerState(int id){
+    public static PlayerState getPlayerState(int id){
         Object sendObj[]={id};
         Object arrObj[]=new Object[8];
         PlayerState playerState = new PlayerState(0,0,0,0,0,0,0,0);
@@ -110,7 +110,7 @@ public class PlayerState {
                 playerState.rang=(Integer)args[7];
             }
         });
-
+return playerState;
     }
 
 }
