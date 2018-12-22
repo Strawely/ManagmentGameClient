@@ -1,4 +1,4 @@
-package com.example.solom.managmentgame
+package com.example.solom.managmentgame.dataLayer
 
 object GameStateHandler {
 

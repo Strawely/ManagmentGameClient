@@ -29,7 +29,8 @@ public class EsmFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("===BtnClick===");
+                System.out.println("===EsmOrderClick===");
+
             }
         });
         return view;

@@ -1,8 +1,10 @@
 package com.example.solom.managmentgame;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.PlayerState;
 
 public class FabricActivity extends Activity {
 private PlayerState playerState;

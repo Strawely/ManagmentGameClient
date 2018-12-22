@@ -10,11 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.Player;
+import com.example.solom.managmentgame.dataLayer.SocketConnector;
 import com.github.nkzawa.socketio.client.Ack;
-import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 public class AuthActivity extends Activity {
 

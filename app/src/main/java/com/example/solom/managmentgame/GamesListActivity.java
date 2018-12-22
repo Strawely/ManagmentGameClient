@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.solom.managmentgame.dataLayer.Game;
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.SocketConnector;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Ack;
 

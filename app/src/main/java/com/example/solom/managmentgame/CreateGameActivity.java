@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.SocketConnector;
+
 public class CreateGameActivity extends Activity {
 
     private String[] numOfPlayers ={"2","3","4"};

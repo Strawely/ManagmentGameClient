@@ -7,7 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.github.nkzawa.emitter.Emitter;
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_game_activity);
+        setContentView(R.layout.activity_game);
         ViewPager viewPager = findViewById(R.id.viewPager);
         setupViewPager(viewPager);
 
@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         tabLayout.getTabAt(0).setIcon(R.drawable.bank);
+        tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
     }
 
     private void setupViewPager(ViewPager viewPager) {

@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.Player;
+
 public class AvatarChoiceActivity extends Activity {
 
     @Override

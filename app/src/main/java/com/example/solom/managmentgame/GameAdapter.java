@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.solom.managmentgame.dataLayer.Game;
+
 import java.util.ArrayList;
 
 public class GameAdapter extends BaseAdapter {

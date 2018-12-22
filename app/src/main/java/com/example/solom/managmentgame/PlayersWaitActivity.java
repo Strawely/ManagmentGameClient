@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.solom.managmentgame.dataLayer.SocketConnector;
+
 public class PlayersWaitActivity extends Activity {
 
     @Override

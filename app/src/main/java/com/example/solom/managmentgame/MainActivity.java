@@ -2,20 +2,15 @@ package com.example.solom.managmentgame;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.SocketConnector;
 
-import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
