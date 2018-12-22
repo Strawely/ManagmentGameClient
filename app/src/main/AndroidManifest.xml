@@ -28,7 +28,6 @@
         <activity
             android:name=".PlayersWaitActivity"
             android:noHistory="true" />
-        <activity android:name=".FabricActivity" />
         <activity android:name=".CompetitorsActivity" />
         <activity android:name=".GameActivity" />
     </application>
