@@ -26,13 +26,14 @@
         android:layout_height="wrap_content"
         app:layout_column="2"
         app:layout_row="0"
+        android:paddingStart="20dp"
         android:text="Цена min"/>
 
     <TextView
         android:id="@+id/esmPriceTextView"
         app:layout_column="3"
         app:layout_row="0"
-        android:layout_marginStart="5dp"/>
+        android:layout_marginStart="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,13 +41,15 @@
         app:layout_column="2"
         app:layout_row="1"
         app:layout_gravity="center"
+        android:paddingStart="20dp"
         android:text="Количество"/>
 
     <TextView
         android:id="@+id/esmQtyTextView"
         app:layout_column="3"
         app:layout_row="1"
-        android:layout_marginStart="5dp"/>
+        app:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"/>
 
     <TextView
         android:layout_height="wrap_content"

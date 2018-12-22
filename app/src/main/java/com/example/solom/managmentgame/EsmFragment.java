@@ -4,6 +4,7 @@ package com.example.solom.managmentgame;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,10 @@ public class EsmFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +64,7 @@ public class EsmFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 System.out.println("===EsmOrderClick===");
+                button.setEnabled(false);
                 SocketConnector.sendEsmRequest(Integer.parseInt(esmQtyEditText.getText().toString()),
                         Integer.parseInt(esmPriceEditText.getText().toString()));
             }
