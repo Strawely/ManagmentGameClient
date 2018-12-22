@@ -7,4 +7,7 @@ object GameStateHandler {
 
     @JvmStatic
     var game: Game? = null
+
+    @JvmStatic
+    var  playerState: PlayerState? = null
 }

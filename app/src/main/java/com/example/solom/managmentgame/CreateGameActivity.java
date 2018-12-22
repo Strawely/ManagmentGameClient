@@ -8,8 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.solom.managmentgame.dataLayer.Game;
 import com.example.solom.managmentgame.dataLayer.GameStateHandler;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
+import com.github.nkzawa.socketio.client.Ack;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class CreateGameActivity extends Activity {
 
@@ -65,10 +70,24 @@ public class CreateGameActivity extends Activity {
             int eGP=Integer.parseInt(spinnerEGP.getSelectedItem().toString());
             int eSM=Integer.parseInt(spinnerESM.getSelectedItem().toString());
             String name = gameNameEditText.getText().toString();
-
-            int moneyInGame=Integer.parseInt(money.getText().toString());
+            int moneyInGame = 10000;
+            if(money.getText() != null && !money.getText().toString().isEmpty())
+                moneyInGame=Integer.parseInt(money.getText().toString());
             Object arrObj[]={GameStateHandler.getPlayer().getId(),SocketConnector.getSocket().id(),name, eSM,eGP,moneyInGame,fab,aFab,plNum};
-            SocketConnector.getSocket().emit("create_game",arrObj);
+            SocketConnector.getSocket().emit("create_game", arrObj, new Ack() {
+                @Override
+                public void call(Object... args) {
+                    JSONArray jsonArray = (JSONArray)args[0];
+                    try {
+                        Game game = new Game(jsonArray.getInt(0), jsonArray.getInt(1), jsonArray.getInt(2), jsonArray.getInt(3),
+                                jsonArray.getInt(4) == 1, jsonArray.getString(5), jsonArray.getInt(6), jsonArray.getInt(7),
+                                jsonArray.getInt(8), jsonArray.getInt(9), jsonArray.getInt(10), jsonArray.getInt(11), jsonArray.getInt(12));
+                        GameStateHandler.setGame(game);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             Intent intent = new Intent(this, PlayersWaitActivity.class);
             startActivity(intent);
             finish();

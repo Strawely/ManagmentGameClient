@@ -74,7 +74,22 @@ public class SocketConnector {
     }
 
     public static void sendEsmRequest(int qty, int price){
-        Object[] args = new Object[]{Objects.requireNonNull(GameStateHandler.getPlayer()).getId(), price, qty};
-        socket.emit("esm_order", args);
+        if(GameStateHandler.getPlayer() != null) {
+            Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), price, qty};
+            socket.emit("esm_order", args);
+        }
+    }
+
+    public static void updatePlayerState(){
+        socket.emit("get_player_state", new Object[]{GameStateHandler.getPlayer().getId()}, new Ack() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("Socket.emit(\"get_player_state\")");
+                PlayerState ps = new PlayerState((Integer) args[0], (Integer) args[1],
+                        (Integer) args[2], (Integer) args[3], (Integer) args[4],
+                        (Integer) args[5], (Integer) args[6], (Integer) args[7]);
+                GameStateHandler.setPlayerState(ps);
+            }
+        });
     }
 }
