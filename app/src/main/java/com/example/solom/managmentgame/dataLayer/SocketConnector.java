@@ -125,7 +125,7 @@ public class SocketConnector {
     public static void sendBuildingReqeust(boolean isAuto){
         if (GameStateHandler.getPlayer() != null) {
             Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), isAuto};
-            socket.emit("take_credit", args);
+            socket.emit("build_request", args);
         }
     }
 
