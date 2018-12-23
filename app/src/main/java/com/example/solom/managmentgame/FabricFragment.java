@@ -60,13 +60,14 @@ public class FabricFragment extends Fragment {
         round=view.findViewById(R.id.textViewRound);
         bankrupt=view.findViewById(R.id.floatingActionButtonBankrupt);
         next=view.findViewById(R.id.floatingActionButtonNext);
+        build=view.findViewById(R.id.floatingActionButtonBuild);
 
         String titleB = "Банкротство";
         String messageB = "Вы правда хотите объявить о банкротстве?";
         String button1StringB = "Да";
 
         String titleN = "Пропустить ход";
-        String messageN = "Вы правда хотите пропустить ход?";
+        String messageN = "Вы правда хотите пропустить операцию?";
         String button1StringN = "Да";
 
         String titleF = "Постройка фабрики";
@@ -88,7 +89,7 @@ public class FabricFragment extends Fragment {
 
         adB.setPositiveButton(button1StringB, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Вы сделали правильный выбор",
+                Toast.makeText(context, "Вы банкрот",
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -103,7 +104,7 @@ public class FabricFragment extends Fragment {
 
         adN.setPositiveButton(button1StringN, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Вы сделали правильный выбор",
+                Toast.makeText(context, "Следующая опреация",
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -116,9 +117,16 @@ public class FabricFragment extends Fragment {
             }
         });
 
+        adF.setPositiveButton(button1StringF, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                Toast.makeText(context, "Вы построили автоматизированную фабрику",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
         adF.setNegativeButton(button2StringF, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Возможно вы правы", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Вы построили обычную фабрику", Toast.LENGTH_LONG)
                         .show();
             }
         });
@@ -139,10 +147,15 @@ public class FabricFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adB.show();
+                adN.show();
             }
         });
-
+build.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        adF.show();
+    }
+});
         update();
 
 
