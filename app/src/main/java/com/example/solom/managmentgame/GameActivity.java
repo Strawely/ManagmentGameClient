@@ -18,8 +18,6 @@ import com.github.nkzawa.emitter.Emitter;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.List;
-
 public class GameActivity extends AppCompatActivity {
 
     private ViewPagerAdapter adapter;
@@ -56,8 +54,8 @@ public class GameActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new EsmFragment(), "Банк");
-        adapter.addFragment(new FabricFragment(), "Фабрики");
-        adapter.addFragment(new InfoFragment(), "Инфо");
+        adapter.addFragment(new Fragment(), "Фабрики");
+        adapter.addFragment(new Fragment(), "Соперники");
         viewPager.setAdapter(adapter);
     }
 
@@ -74,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         adapter.notifyDataSetChanged();
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_gavel_black_24dp);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.hammer);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
                         tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
                     }
@@ -126,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     try {
-                                        Toast.makeText(context, String.format("Выплачены проценты по ссудам: %d $", tuple.getInt(1)), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, String.format("Выплачены проценты по ссудам: $d $", tuple.getInt(1)), Toast.LENGTH_LONG).show();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -141,64 +139,5 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        SocketConnector.getSocket().on("wait_credit_payoff", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println("===wait_credit_payoff===");
-                SocketConnector.sendCreditPayoff();
-            }
-        });
-
-        SocketConnector.getSocket().on("paid_credit_sum", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println("===paid_credit_sum===");
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(context, String.format("Выплаченно ссуд на сумму: %d $", ((Integer) args[0]) == null? 0 : (Integer)args[0]), Toast.LENGTH_LONG).show();
-                        adapter.changeFragment(0, new CreditFragment(), "Банк");
-                        adapter.notifyDataSetChanged();
-                        tabLayout.getTabAt(0).setIcon(R.drawable.bank);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
-                    }
-                });
-            }
-        });
-
-        SocketConnector.getSocket().on("wait_take_credit", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println("===wait_take_credit===");
-
-            }
-        });
-
-        SocketConnector.getSocket().on("wait_next_turn", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println("===wait_next_turn===");
-                SocketConnector.sendNextTurn();
-            }
-        });
-
-        SocketConnector.getSocket().on("new_market_lvl", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println("===new_market_lvl===");
-                GameStateHandler.getGame().setMarketLvl((Integer)args[0]);
-                adapter.changeFragment(0, new EsmFragment(), "Банк");
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                        tabLayout.getTabAt(0).setIcon(R.drawable.esm);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
-                    }
-                });
-            }
-        });
     }
 }
