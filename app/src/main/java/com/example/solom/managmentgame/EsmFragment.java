@@ -46,15 +46,15 @@ public class EsmFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_esm, container, false);
         Handler handler = new Handler();
-        double maxQty = 0;
-        double minPrice = 0;
+        int maxQty = 0;
+        int minPrice = 0;
         if(GameStateHandler.getGame() != null) {
              maxQty = GameStateHandler.getGame().getMarket()[GameStateHandler.getGame().getMarketLvl() - 1][0];
              minPrice = GameStateHandler.getGame().getMarket()[GameStateHandler.getGame().getMarketLvl() - 1][1];
         }
 
-        ((TextView)view.findViewById(R.id.esmQtyTextView)).setText(Double.toString(maxQty));
-        ((TextView)view.findViewById(R.id.esmPriceTextView)).setText(Double.toString(minPrice));
+        ((TextView)view.findViewById(R.id.esmQtyTextView)).setText(Integer.toString(maxQty));
+        ((TextView)view.findViewById(R.id.esmPriceTextView)).setText(Integer.toString(minPrice) + " $");
 
         Button button = view.findViewById(R.id.esmSendRequestBtn);
         esmPriceEditText = view.findViewById(R.id.esmPriceEditText);

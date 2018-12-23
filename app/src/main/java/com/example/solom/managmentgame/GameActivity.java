@@ -69,7 +69,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         adapter.notifyDataSetChanged();
-                        tabLayout.getTabAt(0).setIcon(R.drawable.bank);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_gavel_black_24dp);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
                         tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
                     }
@@ -98,7 +98,7 @@ public class GameActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.notifyDataSetChanged();
+                         adapter.notifyDataSetChanged();
                         tabLayout.getTabAt(0).setIcon(R.drawable.egp);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
                         tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);

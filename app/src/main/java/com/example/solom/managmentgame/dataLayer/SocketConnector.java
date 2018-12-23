@@ -105,4 +105,11 @@ public class SocketConnector {
             socket.emit("produce", args);
         }
     }
+
+    public static void sendEgpRequest(int qty, int price){
+        if(GameStateHandler.getPlayer() != null) {
+            Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), price, qty};
+            socket.emit("egp_request", args);
+        }
+    }
 }
