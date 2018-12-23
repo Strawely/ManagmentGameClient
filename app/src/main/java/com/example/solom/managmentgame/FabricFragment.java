@@ -24,7 +24,7 @@ public class FabricFragment extends Fragment {
     private PlayerState playerState;
     ImageView fabric;
     ImageView fabricA;
-    private Context context = getContext();
+    private Context context ;
     AlertDialog.Builder adB;
     AlertDialog.Builder adN;
     AlertDialog.Builder adF;
@@ -49,11 +49,8 @@ public class FabricFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fabric, container, false);
+        context = getActivity();
         liner = view.findViewById(R.id.linerFabric);
-        fabric=new ImageView(context);
-        fabric.setBackgroundResource(R.drawable.fabric);
-        fabricA=new ImageView(context);
-        fabricA.setBackgroundResource(R.drawable.auto_fabric);
         eSM=view.findViewById(R.id.textViewEsm);
         eGP=view.findViewById(R.id.textViewEgp);
         money=view.findViewById(R.id.textViewMoney);
@@ -61,6 +58,8 @@ public class FabricFragment extends Fragment {
         bankrupt=view.findViewById(R.id.floatingActionButtonBankrupt);
         next=view.findViewById(R.id.floatingActionButtonNext);
         build=view.findViewById(R.id.floatingActionButtonBuild);
+
+        update();
 
         String titleB = "Банкротство";
         String messageB = "Вы правда хотите объявить о банкротстве?";
@@ -150,27 +149,45 @@ public class FabricFragment extends Fragment {
                 adN.show();
             }
         });
+
 build.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         adF.show();
     }
 });
-        update();
+
 
 
         return view;
     }
+@Override
+public void onStart(){
+        super.onStart();
+        update();
+}
+@Override
+public void onPause(){
+super.onPause();
+}
+@Override
+public void onResume(){
 
-
+        super.onResume();
+        update();
+}
 
     protected void update(){
         SocketConnector.updatePlayerState();
         playerState = GameStateHandler.getPlayerState();
         for(int i=0;i<playerState.getFabrics1();i++){
+            fabric=new ImageView(context);
+            fabric.setBackgroundResource(R.drawable.fabric);
             liner.addView(fabric);
         }
         for(int i=0;i<playerState.getFabrics2();i++){
+            fabricA=new ImageView(context);
+            fabricA.setBackgroundResource(R.drawable.auto_fabric);
             liner.addView(fabricA);
         }
         eGP.setText(playerState.getEgp());
