@@ -15,6 +15,9 @@ import com.example.solom.managmentgame.dataLayer.GameStateHandler;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
 import com.github.nkzawa.emitter.Emitter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 public class GameActivity extends AppCompatActivity {
 
     private ViewPagerAdapter adapter;
@@ -98,12 +101,41 @@ public class GameActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                         adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                         tabLayout.getTabAt(0).setIcon(R.drawable.egp);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
                         tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
                     }
                 });
+            }
+        });
+
+        SocketConnector.getSocket().on("paid_percents", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===paid_percents===");
+                JSONArray jsonArray = (JSONArray) args[0];
+                int sum = 0;
+                for (int i = 0; i < jsonArray.length(); i++){
+                    try {
+                        JSONArray tuple = jsonArray.getJSONArray(i);
+                        if(tuple.getInt(0) == GameStateHandler.getPlayer().getId()){
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Toast.makeText(context, String.format("Выплачены проценты по ссудам: $d $", tuple.getInt(1)), Toast.LENGTH_LONG).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         });
     }
