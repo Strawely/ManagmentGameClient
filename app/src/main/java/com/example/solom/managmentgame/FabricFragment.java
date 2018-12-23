@@ -27,14 +27,13 @@ public class FabricFragment extends Fragment {
     private Context context ;
     AlertDialog.Builder adB;
     AlertDialog.Builder adN;
-    AlertDialog.Builder adF;
     Handler handler = new Handler();
     TextView eSM;
     TextView eGP;
     TextView money;
     TextView round;
     LinearLayout liner;
-    Button bankrupt,build,next;
+    Button bankrupt,next;
 
 
     public FabricFragment() {
@@ -57,7 +56,7 @@ public class FabricFragment extends Fragment {
         round=view.findViewById(R.id.textViewRound);
         bankrupt=view.findViewById(R.id.floatingActionButtonBankrupt);
         next=view.findViewById(R.id.floatingActionButtonNext);
-        build=view.findViewById(R.id.floatingActionButtonBuild);
+
 
         update();
 
@@ -81,10 +80,6 @@ public class FabricFragment extends Fragment {
         adN = new AlertDialog.Builder(context);
         adN.setTitle(titleN);  // заголовок
         adN.setMessage(messageN); // сообщение
-
-        adF = new AlertDialog.Builder(context);
-        adF.setTitle(titleF);  // заголовок
-        adF.setMessage(messageF); // сообщение
 
         adB.setPositiveButton(button1StringB, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) {
@@ -116,27 +111,6 @@ public class FabricFragment extends Fragment {
             }
         });
 
-        adF.setPositiveButton(button1StringF, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Вы построили автоматизированную фабрику",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
-        adF.setNegativeButton(button2StringF, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Вы построили обычную фабрику", Toast.LENGTH_LONG)
-                        .show();
-            }
-        });
-        adF.setCancelable(true);
-        adF.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
-                Toast.makeText(context, "Вы ничего не выбрали",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
         bankrupt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,12 +124,7 @@ public class FabricFragment extends Fragment {
             }
         });
 
-build.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        adF.show();
-    }
-});
+
  return view;
     }
 @Override

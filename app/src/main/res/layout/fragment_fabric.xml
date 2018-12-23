@@ -98,24 +98,12 @@
         android:clickable="true"
         android:src="@drawable/ic_close_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonBuild"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonNext"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
         app:layout_constraintVertical_bias="0.523" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButtonBuild"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/light_blue"
-        android:clickable="true"
-        android:src="@drawable/ic_add_coral_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonNext"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButtonBankrupt"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonNext"
@@ -127,7 +115,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButtonBuild"
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButtonBankrupt"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <ImageView

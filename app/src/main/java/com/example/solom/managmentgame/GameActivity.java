@@ -174,6 +174,23 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+        SocketConnector.getSocket().on("wait_build_request", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===wait_build_request===");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.changeFragment(0, new BuildFragment(), "Строительство");
+                        adapter.notifyDataSetChanged();
+                        tabLayout.getTabAt(0).setIcon(R.drawable.building);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
+                    }
+                });
+            }
+        });
+
 
         SocketConnector.getSocket().on("wait_next_turn", new Emitter.Listener() {
             @Override
