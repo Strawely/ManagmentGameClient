@@ -156,10 +156,7 @@ build.setOnClickListener(new View.OnClickListener() {
         adF.show();
     }
 });
-
-
-
-        return view;
+ return view;
     }
 @Override
 public void onStart(){

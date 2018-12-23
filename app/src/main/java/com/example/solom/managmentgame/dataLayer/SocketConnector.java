@@ -112,5 +112,24 @@ public class SocketConnector {
             socket.emit("egp_request", args);
         }
     }
-    public static void send
+    public static void sendCreditRequest(int amount) {
+        if (GameStateHandler.getPlayer() != null) {
+            Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), amount};
+            socket.emit("take_credit", args);
+        }
+    }
+    public static void sendCreditPayoff(){
+        socket.emit("credit_payoff", GameStateHandler.getPlayer().getId());
+    }
+
+    public static void sendBuildingReqeust(boolean isAuto){
+        if (GameStateHandler.getPlayer() != null) {
+            Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), isAuto};
+            socket.emit("take_credit", args);
+        }
+    }
+
+    public static void sendNextTurn(){
+        socket.emit("next_turn", GameStateHandler.getPlayer().getId());
+    }
 }
