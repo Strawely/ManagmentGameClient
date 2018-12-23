@@ -102,7 +102,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintVertical_bias="0.523" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonBuild"
