@@ -112,4 +112,12 @@ public class SocketConnector {
             socket.emit("egp_request", args);
         }
     }
+
+    public static void sendCreditPayoff(){
+        socket.emit("credit_payoff", GameStateHandler.getPlayer().getId());
+    }
+
+    public static void sendNextTurn(){
+        socket.emit("next_turn", GameStateHandler.getPlayer().getId());
+    }
 }

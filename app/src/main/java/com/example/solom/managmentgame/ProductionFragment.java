@@ -40,9 +40,19 @@ public class ProductionFragment extends Fragment {
         sendProductionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int fabrics1 = Integer.parseInt(fabrics1EditText.getText().toString());
-                int fabrics2 = Integer.parseInt(fabrics2EditText.getText().toString());
-                int qty = Integer.parseInt(qtyEditText.getText().toString());
+
+                int fabrics1 = 0;
+                if(!fabrics1EditText.getText().toString().isEmpty())
+                    fabrics1 = Integer.parseInt(fabrics1EditText.getText().toString());
+
+                int fabrics2 = 0;
+                if(!fabrics2EditText.getText().toString().isEmpty())
+                    fabrics2 = Integer.parseInt(fabrics2EditText.getText().toString());
+
+                int qty = 0;
+                if (!qtyEditText.getText().toString().isEmpty()) {
+                    qty = Integer.parseInt(qtyEditText.getText().toString());
+                }
                 SocketConnector.sendProduction(qty, fabrics1, fabrics2);
                 sendProductionBtn.setEnabled(false);
             }
