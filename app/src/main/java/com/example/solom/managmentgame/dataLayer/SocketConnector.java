@@ -85,11 +85,24 @@ public class SocketConnector {
             @Override
             public void call(Object... args) {
                 System.out.println("Socket.emit(\"get_player_state\")");
-                PlayerState ps = new PlayerState((Integer) args[0], (Integer) args[1],
-                        (Integer) args[2], (Integer) args[3], (Integer) args[4],
-                        (Integer) args[5], (Integer) args[6], (Integer) args[7]);
+                JSONArray jsonArray = (JSONArray) args[0];
+                PlayerState ps = null;
+                try {
+                    ps = new PlayerState(jsonArray.getInt(0), jsonArray.getInt(1),
+                            jsonArray.getInt(2), jsonArray.getInt(3), jsonArray.getInt(4),
+                            jsonArray.getInt(5), jsonArray.getInt(6), jsonArray.getInt(7));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 GameStateHandler.setPlayerState(ps);
             }
         });
+    }
+
+    public static void sendProduction(int quantity, int fabrics1, int fabrics2){
+        if(GameStateHandler.getPlayer() != null){
+            Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), quantity, fabrics1, fabrics2};
+            socket.emit("produce", args);
+        }
     }
 }

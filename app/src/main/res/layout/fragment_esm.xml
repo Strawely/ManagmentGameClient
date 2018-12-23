@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EsmFragment"
-    xmlns:app="http://schemas.android.com/apk/lib/com.package.class"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:columnCount="4"
     app:rowCount="5"
     android:background="@color/alice_blue">
@@ -73,7 +73,9 @@
         android:maxEms="5"
         android:inputType="numberDecimal"
         android:textColor="@color/black"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:text="0"
+        android:selectAllOnFocus="true"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -97,7 +99,9 @@
         android:maxEms="5"
         android:inputType="numberDecimal"
         android:textColor="@color/black"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:text="0"
+        android:selectAllOnFocus="true"/>
 
     <Button
         android:id="@+id/esmSendRequestBtn"

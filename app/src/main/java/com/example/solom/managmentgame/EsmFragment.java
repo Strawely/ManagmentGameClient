@@ -29,8 +29,7 @@ public class EsmFragment extends Fragment {
 
     private EditText esmPriceEditText;
     private EditText esmQtyEditText;
-    private Context context = getContext();
-    Handler handler = new Handler();
+
 
     public EsmFragment() {
         // Required empty public constructor
@@ -46,6 +45,7 @@ public class EsmFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_esm, container, false);
+        Handler handler = new Handler();
         double maxQty = 0;
         double minPrice = 0;
         if(GameStateHandler.getGame() != null) {

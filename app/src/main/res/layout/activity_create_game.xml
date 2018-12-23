@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/lib/com.package.class"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -68,7 +68,9 @@
         android:ems="10"
         android:inputType="number"
         app:layout_column="1"
-        app:layout_row="3" />
+        app:layout_row="3"
+        android:text="10000"
+        android:selectAllOnFocus="true"/>
 
     <TextView
         android:layout_marginTop="10dp"

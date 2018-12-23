@@ -82,7 +82,7 @@
     <string name="players_auto_fact">Количество ав-х фабрик</string>
     <string name="players_ESM">ЕСМ</string>
     <string name="players_EGP">ЕГП</string>
-<string name="chtoby_rabotala_u_vani">lib/com.package.class</string>
+    <string name="chtoby_rabotala_u_vani">lib/com.package.class</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

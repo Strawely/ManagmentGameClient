@@ -15,7 +15,7 @@ public class Game {
     private int maxPlayers;
     private int progress;
 
-    private double[][] market;
+    private final int[][] market;
 
     public Game(int id, int turnNum, int turnStage, int marketLvl, boolean isOpened, String name,
                 int sEsm, int sEgp, int sMoney, int sFabrics1, int sFabrics2, int maxPlayers, int progress) {
@@ -32,11 +32,11 @@ public class Game {
         this.sFabrics2 = sFabrics2;
         this.maxPlayers = maxPlayers;
         this.progress = progress;
-        market = new double[][]{{1.0*maxPlayers, 800, 3.0*maxPlayers, 6500},
-                                {1.5*maxPlayers, 650, 2.5*maxPlayers, 6000},
-                                {2.0*maxPlayers, 500, 2.0*maxPlayers, 5500},
-                                {2.5*maxPlayers, 400, 1.5*maxPlayers, 5000},
-                                {3.0*maxPlayers, 300, 1.0*maxPlayers, 4500}};
+        market = new int[][]{{1*maxPlayers, 800, 5*maxPlayers, 6500},
+                {2*maxPlayers, 650, 4*maxPlayers, 6000},
+                {3*maxPlayers, 500, 3*maxPlayers, 5500},
+                {4*maxPlayers, 400, 2*maxPlayers, 5000},
+                {5*maxPlayers, 300, 1*maxPlayers, 4500}};
     }
 
     public int getId() {
@@ -95,12 +95,8 @@ public class Game {
         this.marketLvl = marketLvl;
     }
 
-    public double[][] getMarket() {
+    public int[][] getMarket() {
         return market;
-    }
-
-    public void setMarket(double[][] market) {
-        this.market = market;
     }
 
     public void setId(int id) {

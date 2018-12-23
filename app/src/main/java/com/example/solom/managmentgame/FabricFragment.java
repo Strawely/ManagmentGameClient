@@ -1,6 +1,5 @@
 package com.example.solom.managmentgame;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +20,6 @@ public class FabricFragment extends Fragment {
     private PlayerState playerState;
     ImageView fabric;
     ImageView fabricA;
-    private Context context = getContext();
     Handler handler = new Handler();
     TextView eSM;
     TextView eGP;
@@ -41,11 +39,11 @@ TextView round;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fabric, container, false);
+        View view = inflater.inflate(R.layout.fragment_fabric, container, false);
         liner = view.findViewById(R.id.linerFabric);
-        fabric=new ImageView(context);
+        fabric=new ImageView(getActivity());
         fabric.setBackgroundResource(R.drawable.fabric);
-        fabricA=new ImageView(context);
+        fabricA=new ImageView(getActivity());
         fabricA.setBackgroundResource(R.drawable.auto_fabric);
         eSM=view.findViewById(R.id.textViewEsm);
         eGP=view.findViewById(R.id.textViewEgp);
@@ -59,7 +57,7 @@ TextView round;
     protected void update(){
         SocketConnector.updatePlayerState();
         playerState = GameStateHandler.getPlayerState();
-        for(int i=0;i<playerState.getFabrics1();i++){
+        for(int i=0;i<GameStateHandler.getPlayerState().getFabrics1();i++){
             liner.addView(fabric);
         }
         for(int i=0;i<playerState.getFabrics2();i++){
@@ -67,7 +65,7 @@ TextView round;
         }
         eGP.setText(playerState.getEgp());
         eSM.setText(playerState.getEsm());
-        String m=Integer.toString(playerState.getMoney())+"$";
+        String m=Integer.toString(GameStateHandler.getPlayerState().getMoney())+"$";
         money.setText(m);
         round.setText(GameStateHandler.getGame().getTurnNum());
     }

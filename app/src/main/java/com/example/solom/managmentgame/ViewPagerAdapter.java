@@ -19,7 +19,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
-    private final List<Drawable> mFragmentIconList = new ArrayList<>();
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -45,16 +44,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return mFragmentTitleList.get(position);
     }
 
-    public void addFragment(Fragment fragment, String title, Drawable drawable) {
+    public void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
-        mFragmentIconList.add(drawable);
     }
 
-    public void changeFragment(int i, Fragment fragment, String title, Drawable drawable){
+    public void changeFragment(int i, Fragment fragment, String title){
         mFragmentList.set(i, fragment);
         mFragmentTitleList.set(i, title);
-        mFragmentIconList.set(i, drawable);
     }
 
     @Override

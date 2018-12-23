@@ -1,15 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/production_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductionFragment"
-    android:gravity="center"
-    android:id="@+id/production_container">
+    app:columnCount="2"
+    app:rowCount="5"
+    tools:context=".ProductionFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Производство продукции" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Обычные фабрики "
+        app:layout_column="0"
+        app:layout_row="1" />
+
+    <EditText
+        android:id="@+id/productionFabrics1EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_column="1"
+        app:layout_row="1"
+        android:text="0"
+        android:selectAllOnFocus="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Автоматизированные фабрики"
+        app:layout_column="0"
+        app:layout_row="2" />
+
+    <EditText
+        android:id="@+id/productionFabrics2EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_column="1"
+        app:layout_row="2"
+        android:text="0"
+        android:selectAllOnFocus="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Производимые ЕГП"
+        app:layout_column="0"
+        app:layout_row="3" />
+
+    <EditText
+        android:id="@+id/productionQtyEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_column="1"
+        app:layout_row="3"
+        android:text="0"
+        android:selectAllOnFocus="true"/>
+
+    <Button
+        android:id="@+id/sendProductionBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправить заявку"
+        app:layout_column="0"
+        app:layout_columnSpan="2"
+        app:layout_row="4" />
+
+
+</android.support.v7.widget.GridLayout>
