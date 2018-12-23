@@ -56,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new EsmFragment(), "Банк");
-        adapter.addFragment(new Fragment(), "Фабрики");
+        adapter.addFragment(new FabricFragment(), "Фабрики");
         adapter.addFragment(new InfoFragment(), "Инфо");
         viewPager.setAdapter(adapter);
     }
