@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ public class FabricFragment extends Fragment {
     TextView money;
     TextView round;
     LinearLayout liner;
-    Button bankrupt,next;
+    FloatingActionButton bankrupt,next;
 
 
     public FabricFragment() {
@@ -73,17 +74,18 @@ public class FabricFragment extends Fragment {
         String button1StringF = "Автоматизированная";
         String button2StringF="Обычная";
 
-        adB = new AlertDialog.Builder(context);
+        adB = new AlertDialog.Builder(getActivity());
         adB.setTitle(titleB);  // заголовок
         adB.setMessage(messageB); // сообщение
 
-        adN = new AlertDialog.Builder(context);
+        adN = new AlertDialog.Builder(getActivity());
         adN.setTitle(titleN);  // заголовок
         adN.setMessage(messageN); // сообщение
 
         adB.setPositiveButton(button1StringB, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Вы банкрот",
+                SocketConnector.sendBankruptLeave();
+                Toast.makeText(getActivity(), "Вы банкрот",
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -91,14 +93,14 @@ public class FabricFragment extends Fragment {
         adB.setCancelable(true);
         adB.setOnCancelListener(new DialogInterface.OnCancelListener() {
             public void onCancel(DialogInterface dialog) {
-                Toast.makeText(context, "Вы ничего не выбрали",
+                Toast.makeText(getActivity(), "Вы ничего не выбрали",
                         Toast.LENGTH_LONG).show();
             }
         });
 
         adN.setPositiveButton(button1StringN, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int arg1) {
-                Toast.makeText(context, "Следующая опреация",
+                Toast.makeText(getActivity(), "Следующая опреация",
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -106,7 +108,7 @@ public class FabricFragment extends Fragment {
         adN.setCancelable(true);
         adN.setOnCancelListener(new DialogInterface.OnCancelListener() {
             public void onCancel(DialogInterface dialog) {
-                Toast.makeText(context, "Вы ничего не выбрали",
+                Toast.makeText(getActivity(), "Вы ничего не выбрали",
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -147,20 +149,20 @@ public void onResume(){
         SocketConnector.updatePlayerState();
         playerState = GameStateHandler.getPlayerState();
         for(int i=0;i<playerState.getFabrics1();i++){
-            fabric=new ImageView(context);
+            fabric=new ImageView(getActivity());
             fabric.setBackgroundResource(R.drawable.fabric);
             liner.addView(fabric);
         }
         for(int i=0;i<playerState.getFabrics2();i++){
-            fabricA=new ImageView(context);
+            fabricA=new ImageView(getActivity());
             fabricA.setBackgroundResource(R.drawable.auto_fabric);
             liner.addView(fabricA);
         }
-        eGP.setText(playerState.getEgp());
-        eSM.setText(playerState.getEsm());
+        eGP.setText(Integer.toString(playerState.getEgp()));
+        eSM.setText(Integer.toString(playerState.getEsm()));
         String m=Integer.toString(playerState.getMoney())+"$";
         money.setText(m);
-        round.setText(GameStateHandler.getGame().getTurnNum());
+        round.setText(Integer.toString(GameStateHandler.getGame().getTurnNum()));
     }
 }
 

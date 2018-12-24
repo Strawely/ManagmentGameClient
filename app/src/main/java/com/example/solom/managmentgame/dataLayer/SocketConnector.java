@@ -127,4 +127,8 @@ public class SocketConnector {
     public static void sendNextTurn(){
         socket.emit("next_turn", GameStateHandler.getPlayer().getId());
     }
+
+    public static void sendBankruptLeave(){
+        socket.emit("bankrupt_leave", GameStateHandler.getPlayer().getId());
+    }
 }

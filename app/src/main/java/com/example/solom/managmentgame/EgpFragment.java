@@ -69,30 +69,7 @@ public class EgpFragment extends Fragment {
             }
         });
 
-        SocketConnector.getSocket().on("egp_orders_approved", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                System.out.println("===Called egp_orders_approved===");
-                JSONArray ordersApproved = (JSONArray) args[0];
-                boolean isApproved = false;
-                for (int i = 0; i < ordersApproved.length(); i++){
-                    try {
-                        JSONArray order = ordersApproved.getJSONArray(i);
-                        isApproved = order.getInt(1) == GameStateHandler.getPlayer().getId();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (isApproved){
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getActivity(), "Запрос на ЕГП удовлетворён", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            }
-        });
+
 
         return view;
     }
