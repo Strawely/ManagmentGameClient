@@ -265,6 +265,23 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        SocketConnector.getSocket().on("wait_upgrade_request", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===wait_upgrade_request===");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.changeFragment(0, new UpgradeFragment(), "Автоматизация");
+                        adapter.notifyDataSetChanged();
+                        tabLayout.getTabAt(0).setIcon(R.drawable.bot);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
+                    }
+                });
+            }
+        });
+
         SocketConnector.getSocket().on("wait_next_turn", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
