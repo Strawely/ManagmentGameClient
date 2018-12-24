@@ -36,12 +36,18 @@ public class BuildFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_build, container, false);
         Button button=view.findViewById(R.id.buttonBuild);
         RadioButton auto=view.findViewById(R.id.radioButtonAuto);
+        RadioButton none = view.findViewById(R.id.buildNoneRadioBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("===BuildOrderClick===");
                 button.setEnabled(false);
-                SocketConnector.sendBuildingRequest(auto.isChecked());
+                if (none.isChecked()){
+                    SocketConnector.sendBuildingRequest(false, true);
+                }
+                else {
+                    SocketConnector.sendBuildingRequest(auto.isChecked(), false);
+                }
             }
         });
         return view;

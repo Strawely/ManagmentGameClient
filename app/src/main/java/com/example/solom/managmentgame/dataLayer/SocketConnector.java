@@ -117,9 +117,9 @@ public class SocketConnector {
         socket.emit("credit_payoff", GameStateHandler.getPlayer().getId());
     }
 
-    public static void sendBuildingRequest(boolean isAuto){
+    public static void sendBuildingRequest(boolean isAuto, boolean isSkip){
         if (GameStateHandler.getPlayer() != null) {
-            Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), isAuto};
+            Object[] args = new Object[]{GameStateHandler.getPlayer().getId(), isAuto, isSkip};
             socket.emit("build_request", args);
         }
     }

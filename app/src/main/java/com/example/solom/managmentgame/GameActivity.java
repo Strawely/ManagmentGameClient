@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.List;
+import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -305,6 +306,26 @@ public class GameActivity extends AppCompatActivity {
                         tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
                     }
                 });
+            }
+        });
+
+        SocketConnector.getSocket().on("game_over", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                try {
+                    JSONArray jsonArray = (JSONArray)args[0];
+                    boolean isBankrupt = false;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        if(jsonArray.getInt(i) == GameStateHandler.getPlayer().getId()){
+                            isBankrupt = true;
+                            break;
+                        }
+                    }
+                    if(isBankrupt)
+                        SocketConnector.sendBankruptLeave();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

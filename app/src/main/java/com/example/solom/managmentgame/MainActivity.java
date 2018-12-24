@@ -105,5 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onHelpClicked(View view) {
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
     }
 }
