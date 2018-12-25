@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.List;
+import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -63,6 +64,65 @@ public class GameActivity extends AppCompatActivity {
 
     private void initSocketCallbacks(){
         TabLayout tabLayout = findViewById(R.id.tabLayout);
+
+        SocketConnector.getSocket().on("esm_orders_approved", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===Called esm_orders_approved===");
+                JSONArray ordersApproved = (JSONArray) args[0];
+                System.out.println(ordersApproved.toString());
+                boolean isApproved = false;
+                for (int i = 0; i < ordersApproved.length(); i++){
+                    try {
+                        JSONArray order = ordersApproved.getJSONArray(i);
+                        if(order.getInt(1) == GameStateHandler.getPlayer().getId()){
+                            isApproved = true;
+                            break;
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (isApproved){
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, "Запрос на ЕСМ удовлетворён", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+        });
+
+        SocketConnector.getSocket().on("egp_orders_approved", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===Called egp_orders_approved===");
+                JSONArray ordersApproved = (JSONArray) args[0];
+                boolean isApproved = false;
+                for (int i = 0; i < ordersApproved.length(); i++){
+                    try {
+                        JSONArray order = ordersApproved.getJSONArray(i);
+                        if(order.getInt(1) == GameStateHandler.getPlayer().getId()){
+                            isApproved = true;
+                            break;
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (isApproved){
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, "Запрос на ЕГП удовлетворён", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
 
         SocketConnector.getSocket().on("wait_production", new Emitter.Listener() {
             @Override
@@ -140,6 +200,7 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+
         SocketConnector.getSocket().on("wait_credit_payoff", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -174,6 +235,20 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+
+        SocketConnector.getSocket().on("taken_credit", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===taken_credit===");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, String.format("Взята ссуда: %d $", (Integer) args[0]), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
         SocketConnector.getSocket().on("wait_build_request", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -221,7 +296,7 @@ public class GameActivity extends AppCompatActivity {
             public void call(Object... args) {
                 System.out.println("===new_market_lvl===");
                 GameStateHandler.getGame().setMarketLvl((Integer)args[0]);
-                adapter.changeFragment(0, new EsmFragment(), "Банк");
+                adapter.changeFragment(0, esmFragment, "Банк");
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -229,6 +304,54 @@ public class GameActivity extends AppCompatActivity {
                         tabLayout.getTabAt(0).setIcon(R.drawable.esm);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
                         tabLayout.getTabAt(2).setIcon(R.drawable.default_avatar);
+                    }
+                });
+            }
+        });
+
+        SocketConnector.getSocket().on("game_over", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                try {
+                    JSONArray jsonArray = (JSONArray)args[0];
+                    boolean isBankrupt = false;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        if(jsonArray.getInt(i) == GameStateHandler.getPlayer().getId()){
+                            isBankrupt = true;
+                            break;
+                        }
+                    }
+                    if(isBankrupt)
+                        SocketConnector.sendBankruptLeave();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        SocketConnector.getSocket().on("bankrupt_left", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===bankrupt_left===");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        BankruptFragment bankruptFragment = new BankruptFragment();
+                        bankruptFragment.show(getSupportFragmentManager(), "Банкрот");
+                    }
+                });
+            }
+        });
+
+        SocketConnector.getSocket().on("final_scores", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                System.out.println("===final_scores===");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ScoresFragment scoresFragment = new ScoresFragment();
+                        scoresFragment.show(getSupportFragmentManager(), "Счёт");
                     }
                 });
             }

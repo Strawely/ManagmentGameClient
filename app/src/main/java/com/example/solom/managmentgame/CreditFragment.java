@@ -45,12 +45,14 @@ public class CreditFragment extends Fragment {
                 if(!amountEditText.getText().toString().isEmpty()){
                     SocketConnector.getSocket().emit("take_credit", GameStateHandler.getPlayer().getId(),
                             Integer.parseInt(amountEditText.getText().toString()));
+                    ((Button)view).setEnabled(false);
                 }
                 else {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "Введены некорректные данные", Toast.LENGTH_SHORT).show();
+                            ((Button)view).setEnabled(true);
                         }
                     });
                 }

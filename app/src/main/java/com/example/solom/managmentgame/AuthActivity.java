@@ -70,7 +70,10 @@ public class AuthActivity extends Activity {
         try {
             String nickname = ((EditText)findViewById(R.id.loginEditText)).getText().toString();
 
-            if(nickname.isEmpty()) Toast.makeText(this, "Введены некорректные данные", Toast.LENGTH_SHORT).show();
+            if(nickname.isEmpty()) {
+                Toast.makeText(this, "Введены некорректные данные", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Object[] args = new Object[2];
             args[0] = nickname;
             if(GameStateHandler.getPlayer() != null) {
