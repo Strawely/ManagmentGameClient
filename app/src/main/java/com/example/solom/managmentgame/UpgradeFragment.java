@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.solom.managmentgame.dataLayer.GameStateHandler;
 import com.example.solom.managmentgame.dataLayer.PlayerState;
@@ -39,6 +40,7 @@ public class UpgradeFragment extends Fragment {
                     button.setEnabled(false);
                     SocketConnector.sendUpgradeRequest(auto.isChecked());
                 }
+                else{ Toast.makeText(getActivity(), "Не хватает капитала", Toast.LENGTH_LONG).show();}
             }
         });
         return view;

@@ -71,6 +71,7 @@ public class EgpFragment extends Fragment {
                     SocketConnector.sendEgpRequest(Integer.parseInt(egpQtyEditText.getText().toString()),
                             Integer.parseInt(egpPriceEditText.getText().toString()));
                 }
+                else{ Toast.makeText(getActivity(), "Не хватает ЕГП", Toast.LENGTH_LONG).show();}
             }
         });
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.example.solom.managmentgame.dataLayer.GameStateHandler;
 import com.example.solom.managmentgame.dataLayer.PlayerState;
@@ -51,6 +52,7 @@ public class BuildFragment extends Fragment {
                 else {
                     if(auto.isChecked()&&ps.getMoney()>=5000||(!auto.isChecked())&&ps.getMoney()>=2500)
                     SocketConnector.sendBuildingRequest(auto.isChecked(), false);
+                    else{ Toast.makeText(getActivity(), "Не хватает капитала", Toast.LENGTH_LONG).show();}
                 }
             }
         });
