@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/lib/com.package.class"
     android:layout_gravity="center"
     tools:context=".CreditFragment"
     app:rowCount="3"
@@ -38,6 +38,7 @@
         android:maxEms="6"
         app:layout_gravity="end"
         android:selectAllOnFocus="true"
+        android:inputType="numberDecimal"
         android:text="0"/>
 
     <Button
