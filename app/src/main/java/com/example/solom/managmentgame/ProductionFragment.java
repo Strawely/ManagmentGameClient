@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.PlayerState;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
 import com.github.nkzawa.emitter.Emitter;
 
@@ -40,21 +42,23 @@ public class ProductionFragment extends Fragment {
         sendProductionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PlayerState ps=GameStateHandler.getPlayerState();
+                if (Integer.parseInt(qtyEditText.getText().toString()) <= ps.getEsm()&&Integer.parseInt(fabrics1EditText.getText().toString())<=ps.getFabrics2()&&Integer.parseInt(fabrics2EditText.getText().toString())<=ps.getFabrics2()) {
+                    int fabrics1 = 0;
+                    if (!fabrics1EditText.getText().toString().isEmpty())
+                        fabrics1 = Integer.parseInt(fabrics1EditText.getText().toString());
 
-                int fabrics1 = 0;
-                if(!fabrics1EditText.getText().toString().isEmpty())
-                    fabrics1 = Integer.parseInt(fabrics1EditText.getText().toString());
+                    int fabrics2 = 0;
+                    if (!fabrics2EditText.getText().toString().isEmpty())
+                        fabrics2 = Integer.parseInt(fabrics2EditText.getText().toString());
 
-                int fabrics2 = 0;
-                if(!fabrics2EditText.getText().toString().isEmpty())
-                    fabrics2 = Integer.parseInt(fabrics2EditText.getText().toString());
-
-                int qty = 0;
-                if (!qtyEditText.getText().toString().isEmpty()) {
-                    qty = Integer.parseInt(qtyEditText.getText().toString());
+                    int qty = 0;
+                    if (!qtyEditText.getText().toString().isEmpty()) {
+                        qty = Integer.parseInt(qtyEditText.getText().toString());
+                    }
+                    SocketConnector.sendProduction(qty, fabrics1, fabrics2);
+                    sendProductionBtn.setEnabled(false);
                 }
-                SocketConnector.sendProduction(qty, fabrics1, fabrics2);
-                sendProductionBtn.setEnabled(false);
             }
         });
 
