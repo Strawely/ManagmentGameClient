@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.PlayerState;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
 import com.github.nkzawa.emitter.Emitter;
 
@@ -47,6 +48,7 @@ public class EgpFragment extends Fragment {
         Handler handler = new Handler();
         int maxQty = 0;
         int minPrice = 0;
+
         if(GameStateHandler.getGame() != null) {
             maxQty = GameStateHandler.getGame().getMarket()[GameStateHandler.getGame().getMarketLvl() - 1][2];
             minPrice = GameStateHandler.getGame().getMarket()[GameStateHandler.getGame().getMarketLvl() - 1][3];
@@ -62,10 +64,13 @@ public class EgpFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("===EgpOrderClick===");
-                button.setEnabled(false);
-                SocketConnector.sendEgpRequest(Integer.parseInt(egpQtyEditText.getText().toString()),
-                        Integer.parseInt(egpPriceEditText.getText().toString()));
+                PlayerState ps=GameStateHandler.getPlayerState();
+                if(Integer.parseInt(egpQtyEditText.getText().toString())<=ps.getEgp()) {
+                    System.out.println("===EgpOrderClick===");
+                    button.setEnabled(false);
+                    SocketConnector.sendEgpRequest(Integer.parseInt(egpQtyEditText.getText().toString()),
+                            Integer.parseInt(egpPriceEditText.getText().toString()));
+                }
             }
         });
 

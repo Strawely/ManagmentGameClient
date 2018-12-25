@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.PlayerState;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
 
 
@@ -40,12 +42,14 @@ public class BuildFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PlayerState ps=GameStateHandler.getPlayerState();
                 System.out.println("===BuildOrderClick===");
                 button.setEnabled(false);
                 if (none.isChecked()){
                     SocketConnector.sendBuildingRequest(false, true);
                 }
                 else {
+                    if(auto.isChecked()&&ps.getMoney()>=5000||(!auto.isChecked())&&ps.getMoney()>=2500)
                     SocketConnector.sendBuildingRequest(auto.isChecked(), false);
                 }
             }

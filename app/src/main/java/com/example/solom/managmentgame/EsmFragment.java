@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.PlayerState;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
 import com.github.nkzawa.emitter.Emitter;
 
@@ -63,10 +64,14 @@ public class EsmFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PlayerState ps=GameStateHandler.getPlayerState();
+                if(Integer.parseInt(esmPriceEditText.getText().toString())*Integer.parseInt(esmQtyEditText.getText().toString())<=ps.getMoney()){
                 System.out.println("===EsmOrderClick===");
                 button.setEnabled(false);
                 SocketConnector.sendEsmRequest(Integer.parseInt(esmQtyEditText.getText().toString()),
                         Integer.parseInt(esmPriceEditText.getText().toString()));
+            }
+
             }
         });
 

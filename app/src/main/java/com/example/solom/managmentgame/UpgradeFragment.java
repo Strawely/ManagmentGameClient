@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 
+import com.example.solom.managmentgame.dataLayer.GameStateHandler;
+import com.example.solom.managmentgame.dataLayer.PlayerState;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
 
 public class UpgradeFragment extends Fragment {
@@ -31,9 +33,12 @@ public class UpgradeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("===UpgradeOrderClick===");
-                button.setEnabled(false);
-                SocketConnector.sendUpgradeRequest(auto.isChecked());
+                PlayerState ps = GameStateHandler.getPlayerState();
+                if (ps.getMoney() >= 3500) {
+                    System.out.println("===UpgradeOrderClick===");
+                    button.setEnabled(false);
+                    SocketConnector.sendUpgradeRequest(auto.isChecked());
+                }
             }
         });
         return view;

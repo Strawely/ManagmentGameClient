@@ -59,6 +59,7 @@ public class ProductionFragment extends Fragment {
                     SocketConnector.sendProduction(qty, fabrics1, fabrics2);
                     sendProductionBtn.setEnabled(false);
                 }
+
             }
         });
 
