@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.solom.managmentgame.dataLayer.GameStateHandler;
 import com.example.solom.managmentgame.dataLayer.SocketConnector;
+import com.github.nkzawa.emitter.Emitter;
 
 import java.util.Objects;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initSocket();
+        GameStateHandler.setPlayerState(null);
     }
 
     @Override
@@ -36,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         else {
             findViewById(R.id.playBtn).setEnabled(false);
         }
+        SocketConnector.getSocket().on("connect", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                TextView textView=findViewById(R.id.textViewCon);
+                textView.setText("Связь установлена");
+            }
+        });
+
     }
 
     private void viewAvatar(){

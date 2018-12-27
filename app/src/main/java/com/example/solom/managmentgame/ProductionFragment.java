@@ -66,6 +66,7 @@ public class ProductionFragment extends Fragment {
 //                    }
 
                 }
+                else{ Toast.makeText(getActivity(), "Не хватает капитала или ЕСМ", Toast.LENGTH_LONG).show();}
 
             }
         });
