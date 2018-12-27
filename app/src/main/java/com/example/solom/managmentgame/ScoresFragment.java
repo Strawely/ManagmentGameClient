@@ -40,5 +40,8 @@ public class ScoresFragment extends DialogFragment {
         return builder.create();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
 
+    }
 }

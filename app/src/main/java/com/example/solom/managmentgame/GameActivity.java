@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -26,10 +27,13 @@ public class GameActivity extends AppCompatActivity {
     private ViewPagerAdapter adapter;
     private Handler handler = new Handler();
     private Context context = this;
-
     private EsmFragment esmFragment = new EsmFragment();
     private ProductionFragment productionFragment = new ProductionFragment();
     private EgpFragment egpFragment = new EgpFragment();
+    private CreditFragment creditFragment = new CreditFragment();
+    private BuildFragment buildFragment = new BuildFragment();
+    private UpgradeFragment upgradeFragment = new UpgradeFragment();
+   // private ProductionFragment productionFragment = new ProductionFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +132,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void call(Object... args) {
                 System.out.println("===wait_production===");
-                Fragment productionFragment = new ProductionFragment();
+
                 adapter.changeFragment(0, productionFragment, "Банк");
                 handler.post(new Runnable() {
                     @Override
@@ -217,7 +221,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(context, String.format("Выплаченно ссуд на сумму: %d $", ((Integer) args[0]) == null? 0 : (Integer)args[0]), Toast.LENGTH_LONG).show();
-                        adapter.changeFragment(0, new CreditFragment(), "Банк");
+                        adapter.changeFragment(0, creditFragment, "Банк");
                         adapter.notifyDataSetChanged();
                         tabLayout.getTabAt(0).setIcon(R.drawable.bank);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
@@ -256,7 +260,7 @@ public class GameActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.changeFragment(0, new BuildFragment(), "Строительство");
+                        adapter.changeFragment(0, buildFragment, "Строительство");
                         adapter.notifyDataSetChanged();
                         tabLayout.getTabAt(0).setIcon(R.drawable.building);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
@@ -273,7 +277,7 @@ public class GameActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.changeFragment(0, new UpgradeFragment(), "Автоматизация");
+                        adapter.changeFragment(0, upgradeFragment, "Автоматизация");
                         adapter.notifyDataSetChanged();
                         tabLayout.getTabAt(0).setIcon(R.drawable.bot);
                         tabLayout.getTabAt(1).setIcon(R.drawable.fabric);
@@ -356,5 +360,12 @@ public class GameActivity extends AppCompatActivity {
                 });
             }
         });
+
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
     }
 }

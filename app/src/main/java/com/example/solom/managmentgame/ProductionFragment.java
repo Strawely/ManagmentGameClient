@@ -37,27 +37,34 @@ public class ProductionFragment extends Fragment {
         Handler handler = new Handler();
         fabrics1EditText = view.findViewById(R.id.productionFabrics1EditText);
         fabrics2EditText = view.findViewById(R.id.productionFabrics2EditText);
-        qtyEditText = view.findViewById(R.id.productionQtyEditText);
+//        qtyEditText = view.findViewById(R.id.productionQtyEditText);
         sendProductionBtn = view.findViewById(R.id.sendProductionBtn);
         sendProductionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PlayerState ps=GameStateHandler.getPlayerState();
-                if (Integer.parseInt(qtyEditText.getText().toString()) <= ps.getEsm()&&Integer.parseInt(fabrics1EditText.getText().toString())<=ps.getFabrics2()&&Integer.parseInt(fabrics2EditText.getText().toString())<=ps.getFabrics2()) {
-                    int fabrics1 = 0;
-                    if (!fabrics1EditText.getText().toString().isEmpty())
-                        fabrics1 = Integer.parseInt(fabrics1EditText.getText().toString());
+                int fabrics1 = 0;
+                if (!fabrics1EditText.getText().toString().isEmpty())
+                    fabrics1 = Integer.parseInt(fabrics1EditText.getText().toString());
 
-                    int fabrics2 = 0;
-                    if (!fabrics2EditText.getText().toString().isEmpty())
-                        fabrics2 = Integer.parseInt(fabrics2EditText.getText().toString());
+                int fabrics2 = 0;
+                if (!fabrics2EditText.getText().toString().isEmpty())
+                    fabrics2 = Integer.parseInt(fabrics2EditText.getText().toString());
+                if (/*Integer.parseInt(qtyEditText.getText().toString()) <= ps.getEsm()&&*/
+                        fabrics1<=ps.getFabrics2()&&
+                                fabrics2<=ps.getFabrics2() &&
+                                fabrics1 <= ps.getEsm()&&
+                                fabrics2*2 <= ps.getEsm() &&
+                                fabrics1+fabrics2*2 <=ps.getEsm()) {
 
-                    int qty = 0;
-                    if (!qtyEditText.getText().toString().isEmpty()) {
-                        qty = Integer.parseInt(qtyEditText.getText().toString());
-                    }
-                    SocketConnector.sendProduction(qty, fabrics1, fabrics2);
+
+                    SocketConnector.sendProduction(0, fabrics1, fabrics2);
                     sendProductionBtn.setEnabled(false);
+//                    int qty = 0;
+//                    if (!qtyEditText.getText().toString().isEmpty()) {
+//                        qty = Integer.parseInt(qtyEditText.getText().toString());
+//                    }
+
                 }
 
             }
@@ -71,7 +78,7 @@ public class ProductionFragment extends Fragment {
                     @Override
                     public void run() {
                         sendProductionBtn.setEnabled(true);
-                        Toast.makeText(getActivity(), "ЕГП не произведено", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity(), "ЕГП не произведено", Toast.LENGTH_LONG).show();
                     }
                 });
             }

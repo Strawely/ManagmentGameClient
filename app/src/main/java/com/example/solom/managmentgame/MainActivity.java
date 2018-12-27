@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initSocket(){
         try {
-            SocketConnector.initSocket("http://10.0.3.2:5000");
+            SocketConnector.initSocket("http://10.60.13.7:5000");
             SocketConnector.connect();
         } catch (Exception e) {
             e.printStackTrace();

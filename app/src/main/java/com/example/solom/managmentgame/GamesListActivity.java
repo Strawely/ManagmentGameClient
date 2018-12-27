@@ -43,9 +43,27 @@ public class GamesListActivity extends Activity {
                     Game game=(Game)gamesAdapter.getItem(position);
                     Object arrObj[] = {game.getId(), SocketConnector.getSocket().id(), GameStateHandler.getPlayer().getId()};
                     SocketConnector.getSocket().emit("join_game", arrObj);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            gamesAdapter.notifyDataSetChanged();
+                        }
+                    });
                     if(GameStateHandler.getGame() == null)
                         GameStateHandler.setGame(game);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            gamesAdapter.notifyDataSetChanged();
+                        }
+                    });
                     Intent intent = new Intent(context, PlayersWaitActivity.class);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            gamesAdapter.notifyDataSetChanged();
+                        }
+                    });
                     startActivity(intent);
                     finish();
                 }

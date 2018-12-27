@@ -146,23 +146,28 @@ public void onResume(){
 }
 
     protected void update(){
+        liner.removeAllViews();
         SocketConnector.updatePlayerState();
-        playerState = GameStateHandler.getPlayerState();
-        for(int i=0;i<playerState.getFabrics1();i++){
-            fabric=new ImageView(getActivity());
-            fabric.setBackgroundResource(R.drawable.fabric);
-            liner.addView(fabric);
+        if(GameStateHandler.getPlayerState() != null) {
+            playerState = GameStateHandler.getPlayerState();
+            for (int i = 0; i < playerState.getFabrics1(); i++) {
+                fabric = new ImageView(getActivity());
+                fabric.setScaleType(ImageView.ScaleType.FIT_XY);
+                fabric.setBackgroundResource(R.drawable.fabric);
+                liner.addView(fabric);
+            }
+            for (int i = 0; i < playerState.getFabrics2(); i++) {
+                fabricA = new ImageView(getActivity());
+                fabricA.setScaleType(ImageView.ScaleType.FIT_XY);
+                fabricA.setBackgroundResource(R.drawable.auto_fabric);
+                liner.addView(fabricA);
+            }
+            eGP.setText(Integer.toString(playerState.getEgp()));
+            eSM.setText(Integer.toString(playerState.getEsm()));
+            String m = Integer.toString(playerState.getMoney()) + "$";
+            money.setText(m);
+            round.setText(Integer.toString(GameStateHandler.getGame().getTurnNum()));
         }
-        for(int i=0;i<playerState.getFabrics2();i++){
-            fabricA=new ImageView(getActivity());
-            fabricA.setBackgroundResource(R.drawable.auto_fabric);
-            liner.addView(fabricA);
-        }
-        eGP.setText(Integer.toString(playerState.getEgp()));
-        eSM.setText(Integer.toString(playerState.getEsm()));
-        String m=Integer.toString(playerState.getMoney())+"$";
-        money.setText(m);
-        round.setText(Integer.toString(GameStateHandler.getGame().getTurnNum()));
     }
 }
 

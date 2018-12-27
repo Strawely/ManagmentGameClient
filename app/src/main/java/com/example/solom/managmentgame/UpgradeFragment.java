@@ -33,12 +33,12 @@ public class UpgradeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PlayerState ps = GameStateHandler.getPlayerState();
-                if (ps.getMoney() >= 3500) {
-                    System.out.println("===UpgradeOrderClick===");
+//                PlayerState ps = GameStateHandler.getPlayerState();
+//                if (ps.getMoney() >= 3500) {
+//                    System.out.println("===UpgradeOrderClick===");
                     button.setEnabled(false);
                     SocketConnector.sendUpgradeRequest(auto.isChecked());
-                }
+//                }
             }
         });
         return view;
